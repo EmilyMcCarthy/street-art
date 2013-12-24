@@ -1,0 +1,20 @@
+<resources>
+
+    <style name="DefaultButton" parent="@android:style/Widget.Button">
+        <item name="android:background">#000FFF</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_margin">7dp</item>
+        <item name="android:height">@dimen/default_height</item>
+        <item name="android:layout_width">@dimen/default_button_width</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+    <style name="FullInputBox" parent="android:style/Widget.EditText">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">@dimen/input_box</item>
+    </style>
+    <style name="DisplayText" parent="@android:style/Widget.TextView">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+    </style>
+</resources>

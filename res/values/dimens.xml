@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="input_box">250dp</dimen>
+    <dimen name="default_height">45dp</dimen>
+    <dimen name="default_button_width">118dp</dimen>
+
+</resources>
