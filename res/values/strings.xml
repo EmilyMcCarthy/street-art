@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">street-art</string>
     <string name="create_account">Create Account</string>
-    <string name="skip_account">Skip Login (View Only)</string>
+    <string name="skip_account">Skip Login</string>
     <string name="login">Login</string>
     <string name="username">User Name</string>
     <string name="password">Password</string>
