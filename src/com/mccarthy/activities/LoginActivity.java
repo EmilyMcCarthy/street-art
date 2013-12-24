@@ -2,6 +2,7 @@ package com.mccarthy.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
 import com.mccarthy.R;
 
 /**
@@ -15,5 +16,16 @@ public class LoginActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
+    }
+
+    public void onLogin(View view) {
+    }
+
+    public void onCreateAccount(View view) {
+
+    }
+
+    public void onSkipLogin(View view) {
+        startActivity();
     }
 }
