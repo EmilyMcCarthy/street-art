@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Login -->
     <string name="app_name">Street Art Mapper</string>
     <string name="create_account">Create Account</string>
     <string name="skip_account">Skip Login</string>
     <string name="login">Login</string>
     <string name="username">User Name</string>
     <string name="password">Password</string>
+    <!-- Edit Photo -->
+    <string name="title">Title</string>
+    <string name="description">Description (Optional)</string>
 </resources>

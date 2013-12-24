@@ -4,12 +4,23 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-
+    <EditText
+            android:id="@+id/txt_title"
+            style="@style/FullInputBox"
+            android:hint="@string/title"
+            />
     <ImageView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:id="@+id/img_photo"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/banner"
+            />
+    <EditText
+            android:id="@+id/txt_description"
+            style="@style/FullInputBox"
+            android:lines="4"
+            android:maxLines="4"
+            android:hint="@string/description"
             />
 </LinearLayout>
