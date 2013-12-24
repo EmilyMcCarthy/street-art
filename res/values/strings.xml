@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">street-art</string>
+    <string name="app_name">Street Art Mapper</string>
     <string name="create_account">Create Account</string>
     <string name="skip_account">Skip Login</string>
     <string name="login">Login</string>

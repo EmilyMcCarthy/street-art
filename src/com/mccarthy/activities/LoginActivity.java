@@ -26,6 +26,6 @@ public class LoginActivity extends Activity {
     }
 
     public void onSkipLogin(View view) {
-        startActivity();
+        startActivity(FindArtActivity.newIntent(this));
     }
 }

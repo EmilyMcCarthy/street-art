@@ -1,5 +1,7 @@
 <resources>
-
+    <style name="AppTheme" parent="@style/Theme.AppCompat.Light">
+        <item name="android:displayOptions">showHome|useLogo</item>
+    </style>
     <style name="FullPageButton" parent="@android:style/Widget.Button">
         <item name="android:textStyle">bold</item>
         <item name="android:layout_marginLeft">@dimen/deep_margin</item>
