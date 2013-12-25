@@ -9,6 +9,7 @@ import android.widget.EditText;
 import com.android.volley.Response;
 import com.cloudmine.api.ACMUser;
 import com.cloudmine.api.Strings;
+import com.cloudmine.api.db.BaseLocallySavableCMAccessList;
 import com.cloudmine.api.rest.SharedRequestQueueHolders;
 import com.cloudmine.api.rest.response.CreationResponse;
 import com.cloudmine.api.rest.response.LoginResponse;
@@ -93,7 +94,13 @@ public class CreateAccountActivity extends RoboActionBarActivity {
                         user.login(CreateAccountActivity.this, new Response.Listener<LoginResponse>() {
                             @Override
                             public void onResponse(LoginResponse loginResponse) {
+                                user.setSessionToken(loginResponse.getSessionToken());
                                 sessionTokenAccess.storeSessionToken(CreateAccountActivity.this, loginResponse.getSessionToken());
+                                BaseLocallySavableCMAccessList accessList = new BaseLocallySavableCMAccessList(user);
+                                accessList.setLoggedIn(true);
+                                accessList.saveEventually(CreateAccountActivity.this);
+                                accessList.save(CreateAccountActivity.this, null, null); //if this fails, save eventually will take care of this
+                                sessionTokenAccess.storeAccessListId(CreateAccountActivity.this, accessList.getObjectId());
                                 dialog.dismiss();
                                 startActivity(FindArtActivity.newIntent(CreateAccountActivity.this, loginResponse.getSessionToken()));
                             }

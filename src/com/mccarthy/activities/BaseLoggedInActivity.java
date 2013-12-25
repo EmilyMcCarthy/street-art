@@ -9,11 +9,13 @@ import android.support.v7.app.ActionBar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.widget.Toast;
 import com.cloudmine.api.CMSessionToken;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.location.LocationClient;
+import com.mccarthy.R;
 
 import java.util.Collections;
 import java.util.Date;
@@ -137,6 +139,8 @@ public class BaseLoggedInActivity extends RoboActionBarActivity implements
             // Show the error dialog in the DialogFragment
             errorFragment.show(getSupportFragmentManager(),
                     "Location Updates");
+        } else {
+            Toast.makeText(this, R.string.missing_play_store, Toast.LENGTH_LONG).show();
         }
     }
 

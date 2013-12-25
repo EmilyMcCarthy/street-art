@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- General -->
+    <string name="missing_play_store">Unknown error connecting to play store</string>
     <!-- Login -->
     <string name="app_name">Street Art Mapper</string>
     <string name="create_account">Create Account</string>
@@ -18,4 +20,9 @@
     <!-- Edit Photo -->
     <string name="title">Title</string>
     <string name="description">Description (Optional)</string>
+    <string name="missing_title">Please enter a title</string>
+    <string name="missing_image">Please take a picture</string>
+    <string name="error_reading_file">Error reading file</string>
+    <string name="error_saving_file">Error saving file to Cloud</string>
+    <string name="saving_art">Saving...</string>
 </resources>
