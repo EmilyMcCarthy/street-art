@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="fill_parent"
-              android:layout_height="fill_parent"
               android:orientation="vertical"
-              android:gravity="center_horizontal"
-        >
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
     <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -22,18 +21,17 @@
             android:id="@+id/txt_password"
             style="@style/FullInputBox"
             android:hint="@string/password"
-            android:password="true"
+            android:inputType="textPassword"
+            />
+    <EditText
+            android:id="@+id/txt_confirm_password"
+            style="@style/FullInputBox"
+            android:hint="@string/confirm_password"
+            android:inputType="textPassword"
             />
     <Button
-            android:id="@+id/login"
-            style="@style/FullPageButton"
-            android:text="@string/login"
-            android:onClick="onLogin"
-            />
-    <Button
-            android:id="@+id/create"
-            style="@style/FullPageButton"
-            android:text="@string/create_account"
-            android:onClick="onCreateAccount"
-            />
+        style="@style/FullPageButton"
+        android:text="@string/create_account"
+        android:onClick="onCreateAccount"
+        />
 </LinearLayout>

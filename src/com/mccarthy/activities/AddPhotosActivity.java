@@ -8,6 +8,7 @@ import android.util.Log;
 import android.util.Pair;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import com.cloudmine.api.CMSessionToken;
 import com.cloudmine.api.Strings;
 import com.google.inject.Inject;
 import com.mccarthy.R;
@@ -25,8 +26,9 @@ import java.util.List;
 @ContentView(R.layout.edit_photo)
 public class AddPhotosActivity extends BaseLoggedInActivity {
 
-    public static Intent newIntent(Context callingContext) {
+    public static Intent newIntent(Context callingContext, CMSessionToken sessionToken) {
         Intent takePicturesIntent = new Intent(callingContext, AddPhotosActivity.class);
+        addSessionTokenToIntent(takePicturesIntent, sessionToken);
         return takePicturesIntent;
     }
 
@@ -82,7 +84,7 @@ public class AddPhotosActivity extends BaseLoggedInActivity {
     }
 
     public void onFindArt(MenuItem item) {
-        startActivity(FindArtActivity.newIntent(this));
+        startActivity(FindArtActivity.newIntent(this, sessionToken));
     }
 
     public void onTakePicture(MenuItem item) {

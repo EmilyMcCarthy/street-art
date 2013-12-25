@@ -1,6 +1,7 @@
 package com.mccarthy.activities;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.content.IntentSender;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -8,12 +9,14 @@ import android.support.v7.app.ActionBar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import com.cloudmine.api.CMSessionToken;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.location.LocationClient;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -24,12 +27,20 @@ public class BaseLoggedInActivity extends RoboActionBarActivity implements
         GooglePlayServicesClient.ConnectionCallbacks,
         GooglePlayServicesClient.OnConnectionFailedListener{
 
+    public static final String SESSION_TOKEN_KEY = "SessionTokenKey";
+
+    public static void addSessionTokenToIntent(Intent intent, CMSessionToken sessionToken) {
+        intent.putExtra(SESSION_TOKEN_KEY, sessionToken.getSessionToken());
+    }
+
     public static final String TAG = "Street-Art";
 
     protected LocationClient locationClient;
+    protected CMSessionToken sessionToken;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sessionToken = new CMSessionToken(getIntent().getStringExtra(SESSION_TOKEN_KEY), new Date());
         locationClient = new LocationClient(this, this, this);
 
         ActionBar actionBar = getSupportActionBar();

@@ -6,7 +6,15 @@
     <string name="skip_account">Skip Login</string>
     <string name="login">Login</string>
     <string name="username">User Name</string>
+    <string name="confirm_password">Confirm password</string>
     <string name="password">Password</string>
+    <string name="account_missing_password">Please enter a password</string>
+    <string name="account_mismatched_password">Your passwords do not match</string>
+    <string name="account_missing_username">Please enter a username</string>
+    <string name="failed_account_create">Failed to create an account</string>
+    <string name="failed_login">Failed to login</string>
+    <string name="creating_account">Creating account...</string>
+    <string name="logging_in">Logging in...</string>
     <!-- Edit Photo -->
     <string name="title">Title</string>
     <string name="description">Description (Optional)</string>
