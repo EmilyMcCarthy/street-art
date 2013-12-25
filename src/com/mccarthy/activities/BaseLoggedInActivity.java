@@ -73,6 +73,10 @@ public class BaseLoggedInActivity extends RoboActionBarActivity implements
         return true;
     }
 
+    public CMSessionToken getSessionToken() {
+        return sessionToken;
+    }
+
     protected List<Integer> getMenuIds() {
         return Collections.EMPTY_LIST;
     }

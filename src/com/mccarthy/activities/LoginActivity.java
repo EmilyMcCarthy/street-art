@@ -7,7 +7,6 @@ import android.widget.EditText;
 import com.android.volley.Response;
 import com.cloudmine.api.ACMUser;
 import com.cloudmine.api.Strings;
-import com.cloudmine.api.db.LocallySavableCMAccessList;
 import com.cloudmine.api.rest.response.LoginResponse;
 import com.google.inject.Inject;
 import com.mccarthy.R;
@@ -62,7 +61,6 @@ public class LoginActivity extends RoboActionBarActivity {
             @Override
             public void onResponse(LoginResponse loginResponse) {
                 sessionTokenAccess.storeSessionToken(LoginActivity.this, loginResponse.getSessionToken());
-                LocallySavableCMAccessList accessList = new LocallySavableCMAccessList();
                 dialog.dismiss();
                 startActivity(FindArtActivity.newIntent(LoginActivity.this, loginResponse.getSessionToken()));
             }

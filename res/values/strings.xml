@@ -25,4 +25,6 @@
     <string name="error_reading_file">Error reading file</string>
     <string name="error_saving_file">Error saving file to Cloud</string>
     <string name="saving_art">Saving...</string>
+    <!-- Photo Viewing -->
+    <string name="error_loading_art">Error loading street art</string>
 </resources>
