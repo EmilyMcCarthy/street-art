@@ -40,7 +40,7 @@ import java.util.List;
  * <br> See LICENSE file included with SDK for details.
  */
 @ContentView(R.layout.edit_photo)
-public class AddPhotosActivity extends BaseLoggedInActivity {
+public class AddPhotosActivity extends BaseLocationActivity {
 
     public static Intent newIntent(Context callingContext, CMSessionToken sessionToken) {
         Intent takePicturesIntent = new Intent(callingContext, AddPhotosActivity.class);
@@ -153,7 +153,7 @@ public class AddPhotosActivity extends BaseLoggedInActivity {
                     @Override
                     public void onResponse(FileCreationResponse fileCreationResponse) {
                         Log.e(TAG, "File saved, saving art");
-                        Location currentLocation = locationClient.getLastLocation();
+                        Location currentLocation = locationProvider.getLastLocation();
                         if(currentLocation == null){ //TODO redo this section
                             currentLocation = new Location("gps");
                             currentLocation.setLatitude(0);
