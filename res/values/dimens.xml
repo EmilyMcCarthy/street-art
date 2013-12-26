@@ -4,5 +4,6 @@
     <dimen name="default_spacing">7dp</dimen>
     <dimen name="default_height">45dp</dimen>
     <dimen name="default_button_width">118dp</dimen>
+    <dimen name="default_row_height">55dp</dimen>
     <dimen name="deep_margin">35dp</dimen>
 </resources>

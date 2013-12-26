@@ -1,7 +1,7 @@
 package com.mccarthy.activities;
 
 import com.google.inject.Inject;
-import com.mccarthy.utility.LocationProvider;
+import com.mccarthy.utility.LocationClientWrapper;
 
 /**
  * <br>Copyright CloudMine LLC. All rights reserved
@@ -10,7 +10,7 @@ import com.mccarthy.utility.LocationProvider;
 public class BaseLocationActivity extends BaseLoggedInActivity {
 
     @Inject
-    protected LocationProvider locationProvider;
+    protected LocationClientWrapper locationProvider;
 
     public void onStart() {
         super.onStart();

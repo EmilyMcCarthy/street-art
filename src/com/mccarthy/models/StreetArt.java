@@ -2,6 +2,7 @@ package com.mccarthy.models;
 
 import com.cloudmine.api.CMGeoPoint;
 import com.cloudmine.api.db.LocallySavableCMObject;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.Arrays;
 import java.util.List;
@@ -24,6 +25,12 @@ public class StreetArt extends LocallySavableCMObject {
         this.photoIds = Arrays.asList(photoIds);
         this.title = title;
         this.description = description;
+    }
+
+    @JsonIgnore
+    public String getMainPhotoId() {
+        if(photoIds == null || photoIds.isEmpty()) return null;
+        return photoIds.get(0);
     }
 
     public List<String> getPhotoIds() {

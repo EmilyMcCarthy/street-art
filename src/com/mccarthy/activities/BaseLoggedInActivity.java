@@ -8,7 +8,6 @@ import android.view.MenuInflater;
 import com.cloudmine.api.CMSessionToken;
 
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -28,9 +27,8 @@ public class BaseLoggedInActivity extends RoboActionBarActivity {
     protected CMSessionToken sessionToken;
 
     public void onCreate(Bundle savedInstanceState) {
+        sessionToken = new CMSessionToken(getIntent().getStringExtra(SESSION_TOKEN_KEY), null);
         super.onCreate(savedInstanceState);
-        sessionToken = new CMSessionToken(getIntent().getStringExtra(SESSION_TOKEN_KEY), new Date());
-
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);

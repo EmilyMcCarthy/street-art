@@ -26,7 +26,7 @@ import java.util.Set;
  * <br> See LICENSE file included with SDK for details.
  */
 @ContextSingleton
-public class LocationProvider implements
+public class LocationClientWrapper implements
         GooglePlayServicesClient.ConnectionCallbacks,
         GooglePlayServicesClient.OnConnectionFailedListener {
     /** GOOGLE PLAY SERVICES **/
@@ -63,7 +63,18 @@ public class LocationProvider implements
     private Set<Handler> connectionHandlers = new HashSet<Handler>();
 
     public Location getLastLocation() {
-        return locationClient.getLastLocation();
+        Location currentLocation;
+        try {
+            currentLocation = getLocationClient().getLastLocation();
+        } catch(IllegalStateException ise) {
+            currentLocation = null; //TODO this is p bad
+        }
+        if(currentLocation == null){ //TODO redo this section
+            currentLocation = new Location("gps");
+            currentLocation.setLatitude(0);
+            currentLocation.setLongitude(0);
+        }
+        return currentLocation;
     }
 
     public boolean tryConnect() {

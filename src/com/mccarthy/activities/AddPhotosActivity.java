@@ -154,11 +154,6 @@ public class AddPhotosActivity extends BaseLocationActivity {
                     public void onResponse(FileCreationResponse fileCreationResponse) {
                         Log.e(TAG, "File saved, saving art");
                         Location currentLocation = locationProvider.getLastLocation();
-                        if(currentLocation == null){ //TODO redo this section
-                            currentLocation = new Location("gps");
-                            currentLocation.setLatitude(0);
-                            currentLocation.setLongitude(0);
-                        }
 
                         StreetArt art = new StreetArt(currentLocation.getLatitude(), currentLocation.getLongitude(), title, descriptionText.getText().toString(), fileCreationResponse.getfileId());
                         art.addAccessListId(sessionTokenAccess.getAccessListId(AddPhotosActivity.this));

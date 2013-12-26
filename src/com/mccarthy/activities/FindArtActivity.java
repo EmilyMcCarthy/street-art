@@ -14,7 +14,8 @@ import java.util.List;
  * <br>Copyright CloudMine LLC. All rights reserved
  * <br> See LICENSE file included with SDK for details.
  */
-public class FindArtActivity extends BaseLoggedInActivity {
+
+public class FindArtActivity extends BaseLocationActivity {
     public static Intent newIntent(Context callingContext, CMSessionToken sessionToken) {
         Intent intent = new Intent(callingContext, FindArtActivity.class);
         addSessionTokenToIntent(intent, sessionToken);
@@ -23,7 +24,7 @@ public class FindArtActivity extends BaseLoggedInActivity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setContentView(R.layout.find_art);
     }
 
     protected List<Integer> getMenuIds() {

@@ -7,8 +7,7 @@
               android:layout_height="match_parent">
 
 
-    <fragment android:name="com.mccarthy.activities.fragments.ArtGalleryFragment"
-              android:id="@+id/fragment_gallery"
+    <fragment android:name="com.mccarthy.activities.fragments.ArtListFragment"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               tools:layout="@layout/art_gallary"/>

@@ -27,4 +27,6 @@
     <string name="saving_art">Saving...</string>
     <!-- Photo Viewing -->
     <string name="error_loading_art">Error loading street art</string>
+    <string name="loading_art">Loading art...</string>
+    <string name="no_art">No art found</string>
 </resources>
