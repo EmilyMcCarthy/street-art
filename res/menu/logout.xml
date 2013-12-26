@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:streetart="http://schemas.android.com/apk/res-auto"
+        >
+    <item android:onClick="onLogout"
+          android:id="@+id/action_logout"
+          android:icon="@android:drawable/ic_menu_close_clear_cancel"
+          android:showAsAction="always"
+          streetart:showAsAction="always"
+            />
+</menu>

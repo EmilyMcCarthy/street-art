@@ -26,7 +26,7 @@ import com.mccarthy.R;
 import com.mccarthy.models.StreetArt;
 import com.mccarthy.utility.ErrorHandling;
 import com.mccarthy.utility.Photo;
-import com.mccarthy.utility.SessionTokenAccess;
+import com.mccarthy.utility.PreferenceSaver;
 import com.mccarthy.utility.Storage;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
@@ -55,7 +55,7 @@ public class AddPhotosActivity extends BaseLocationActivity {
     @Inject
     private Storage storageUtility;
     @Inject
-    private SessionTokenAccess sessionTokenAccess;
+    private PreferenceSaver preferenceSaver;
     @Inject
     private ErrorHandling errorHandling;
     @InjectView(R.id.img_photo)
@@ -156,7 +156,7 @@ public class AddPhotosActivity extends BaseLocationActivity {
                         Location currentLocation = locationProvider.getLastLocation();
 
                         StreetArt art = new StreetArt(currentLocation.getLatitude(), currentLocation.getLongitude(), title, descriptionText.getText().toString(), fileCreationResponse.getfileId());
-                        art.addAccessListId(sessionTokenAccess.getAccessListId(AddPhotosActivity.this));
+                        art.addAccessListId(preferenceSaver.getAccessListId(AddPhotosActivity.this));
                         art.save(AddPhotosActivity.this, sessionToken, new Response.Listener<ObjectModificationResponse>() {
                             @Override
                             public void onResponse(ObjectModificationResponse objectModificationResponse) {

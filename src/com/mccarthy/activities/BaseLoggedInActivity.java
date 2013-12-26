@@ -5,7 +5,10 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import com.cloudmine.api.CMSessionToken;
+import com.google.inject.Inject;
+import com.mccarthy.utility.PreferenceSaver;
 
 import java.util.Collections;
 import java.util.List;
@@ -25,6 +28,8 @@ public class BaseLoggedInActivity extends RoboActionBarActivity {
     public static final String TAG = "Street-Art";
 
     protected CMSessionToken sessionToken;
+    @Inject
+    private PreferenceSaver preferenceSaver;
 
     public void onCreate(Bundle savedInstanceState) {
         sessionToken = new CMSessionToken(getIntent().getStringExtra(SESSION_TOKEN_KEY), null);
@@ -50,6 +55,10 @@ public class BaseLoggedInActivity extends RoboActionBarActivity {
 
     public CMSessionToken getSessionToken() {
         return sessionToken;
+    }
+
+    public void onLogout(MenuItem item) {
+        startActivity(LoginActivity.newInstance(this, preferenceSaver));
     }
 
     protected List<Integer> getMenuIds() {

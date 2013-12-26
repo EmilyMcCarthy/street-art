@@ -8,6 +8,7 @@ import com.android.volley.Response;
 import com.cloudmine.api.CMSessionToken;
 import com.cloudmine.api.SearchQuery;
 import com.cloudmine.api.rest.BaseObjectLoadRequest;
+import com.cloudmine.api.rest.CloudMineRequest;
 import com.cloudmine.api.rest.ObjectLoadRequestBuilder;
 import com.cloudmine.api.rest.SharedRequestQueueHolders;
 import com.cloudmine.api.rest.response.CMObjectResponse;
@@ -36,10 +37,11 @@ public class ArtListFragment extends RoboListFragment{
 
     public void onViewCreated(View view, Bundle savedInstanceState) {
         Location lastLocation = locationProvider.getLastLocation();
-        String searchQuery = SearchQuery.filter(StreetArt.class).and("location").near(lastLocation.getLongitude(), lastLocation.getLatitude()).searchQuery();
-        CMSessionToken sessionToken = ((BaseLoggedInActivity) getActivity()).getSessionToken();
+        String searchQuery = SearchQuery.filter(StreetArt.class).and("location").near(lastLocation.getLongitude(), lastLocation.getLatitude()).searchQuery(); //todo figure out why shared searching is broken
+        final CMSessionToken sessionToken = ((BaseLoggedInActivity) getActivity()).getSessionToken();
 
         setEmptyText(getString(R.string.loading_art));
+        CloudMineRequest.setCachingEnabled(false);
         BaseObjectLoadRequest request = new ObjectLoadRequestBuilder(sessionToken, new Response.Listener<CMObjectResponse>() {
             @Override
             public void onResponse(CMObjectResponse cmObjectResponse) {
@@ -50,7 +52,10 @@ public class ArtListFragment extends RoboListFragment{
                     setListAdapter(new ArtListAdapter(activity, streetArtList));
                 }
             }
-        }, errorHandling.defaultErrorListener(getActivity(), R.string.error_loading_art)).search(searchQuery).getShared().limit(10).getCount().build();
+        }, errorHandling.defaultErrorListener(getActivity(), R.string.error_loading_art))
+                .search(searchQuery)
+                .getShared().limit(10).getCount().build();
+        
         SharedRequestQueueHolders.getRequestQueue(getActivity()).add(request);
     }
 }

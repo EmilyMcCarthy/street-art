@@ -6,15 +6,16 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import com.cloudmine.api.CMSessionToken;
 import com.mccarthy.R;
+import roboguice.inject.ContentView;
 
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 
 /**
  * <br>Copyright CloudMine LLC. All rights reserved
  * <br> See LICENSE file included with SDK for details.
  */
-
+@ContentView(R.layout.find_art)
 public class FindArtActivity extends BaseLocationActivity {
     public static Intent newIntent(Context callingContext, CMSessionToken sessionToken) {
         Intent intent = new Intent(callingContext, FindArtActivity.class);
@@ -22,13 +23,14 @@ public class FindArtActivity extends BaseLocationActivity {
         return intent;
     }
 
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.find_art);
+
     }
 
     protected List<Integer> getMenuIds() {
-        return Collections.singletonList(R.menu.add_photos);
+        return Arrays.asList(R.menu.add_photos, R.menu.logout);
     }
 
     public void onAddPhotos(MenuItem item) {

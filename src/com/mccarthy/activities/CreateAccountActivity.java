@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import com.android.volley.Response;
 import com.cloudmine.api.ACMUser;
+import com.cloudmine.api.CMAccessPermission;
 import com.cloudmine.api.Strings;
 import com.cloudmine.api.db.BaseLocallySavableCMAccessList;
 import com.cloudmine.api.rest.SharedRequestQueueHolders;
@@ -16,7 +17,7 @@ import com.cloudmine.api.rest.response.LoginResponse;
 import com.google.inject.Inject;
 import com.mccarthy.R;
 import com.mccarthy.utility.ErrorHandling;
-import com.mccarthy.utility.SessionTokenAccess;
+import com.mccarthy.utility.PreferenceSaver;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
@@ -35,7 +36,7 @@ public class CreateAccountActivity extends RoboActionBarActivity {
     @Inject
     private ErrorHandling errorHandling;
     @Inject
-    private SessionTokenAccess sessionTokenAccess;
+    private PreferenceSaver preferenceSaver;
     @InjectView(R.id.txt_password)
     private EditText passwordTxt;
     @InjectView(R.id.txt_confirm_password)
@@ -95,14 +96,19 @@ public class CreateAccountActivity extends RoboActionBarActivity {
                             @Override
                             public void onResponse(LoginResponse loginResponse) {
                                 user.setSessionToken(loginResponse.getSessionToken());
-                                sessionTokenAccess.storeSessionToken(CreateAccountActivity.this, loginResponse.getSessionToken());
-                                BaseLocallySavableCMAccessList accessList = new BaseLocallySavableCMAccessList(user);
+                                preferenceSaver.storeSessionToken(CreateAccountActivity.this, loginResponse.getSessionToken());
+                                createAndSaveAccessList();
+
+                                dialog.dismiss();
+                                startActivity(FindArtActivity.newIntent(CreateAccountActivity.this, loginResponse.getSessionToken()));
+                            }
+
+                            private void createAndSaveAccessList() {
+                                BaseLocallySavableCMAccessList accessList = new BaseLocallySavableCMAccessList(user, CMAccessPermission.READ);
                                 accessList.setLoggedIn(true);
                                 accessList.saveEventually(CreateAccountActivity.this);
                                 accessList.save(CreateAccountActivity.this, null, null); //if this fails, save eventually will take care of this
-                                sessionTokenAccess.storeAccessListId(CreateAccountActivity.this, accessList.getObjectId());
-                                dialog.dismiss();
-                                startActivity(FindArtActivity.newIntent(CreateAccountActivity.this, loginResponse.getSessionToken()));
+                                preferenceSaver.storeAccessListId(CreateAccountActivity.this, accessList.getObjectId());
                             }
                         }, errorHandling.defaultErrorListener(CreateAccountActivity.this, R.string.failed_login, dialog));
                     }

@@ -1,6 +1,8 @@
 package com.mccarthy.activities;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -11,7 +13,7 @@ import com.cloudmine.api.rest.response.LoginResponse;
 import com.google.inject.Inject;
 import com.mccarthy.R;
 import com.mccarthy.utility.ErrorHandling;
-import com.mccarthy.utility.SessionTokenAccess;
+import com.mccarthy.utility.PreferenceSaver;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
@@ -23,10 +25,16 @@ import roboguice.inject.InjectView;
 @ContentView(R.layout.login)
 public class LoginActivity extends RoboActionBarActivity {
 
+    public static Intent newInstance(Context callingContext, PreferenceSaver preferenceSaver) {
+        Intent intent = new Intent(callingContext, LoginActivity.class);
+        preferenceSaver.clearSessionTokenAndAccessList(callingContext);
+        return intent;
+    }
+
     @Inject
     private ErrorHandling errorHandling;
     @Inject
-    private SessionTokenAccess sessionTokenAccess;
+    private PreferenceSaver preferenceSaver;
     @InjectView(R.id.txt_password)
     private EditText passwordTxt;
     @InjectView(R.id.txt_username)
@@ -60,7 +68,7 @@ public class LoginActivity extends RoboActionBarActivity {
         user.login(this, new Response.Listener<LoginResponse>() {
             @Override
             public void onResponse(LoginResponse loginResponse) {
-                sessionTokenAccess.storeSessionToken(LoginActivity.this, loginResponse.getSessionToken());
+                preferenceSaver.storeSessionToken(LoginActivity.this, loginResponse.getSessionToken());
                 dialog.dismiss();
                 startActivity(FindArtActivity.newIntent(LoginActivity.this, loginResponse.getSessionToken()));
             }
