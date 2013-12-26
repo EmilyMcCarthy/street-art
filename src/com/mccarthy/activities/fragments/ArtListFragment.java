@@ -55,7 +55,7 @@ public class ArtListFragment extends RoboListFragment{
         }, errorHandling.defaultErrorListener(getActivity(), R.string.error_loading_art))
                 .search(searchQuery)
                 .getShared().limit(10).getCount().build();
-        
+
         SharedRequestQueueHolders.getRequestQueue(getActivity()).add(request);
     }
 }

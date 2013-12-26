@@ -36,7 +36,7 @@ public class PreferenceSaver {
 
     public CMSessionToken getSessionToken(Context context) {
         String token = getSharedPreferences(context).getString(SESSION_TOKEN_KEY, null);
-        if(Strings.isEmpty(token)) return CMSessionToken.FAILED;
+        if(Strings.isEmpty(token)) return null;
         else                       return new CMSessionToken(token, new Date());
     }
 

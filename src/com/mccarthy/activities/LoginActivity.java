@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import com.android.volley.Response;
 import com.cloudmine.api.ACMUser;
+import com.cloudmine.api.CMSessionToken;
 import com.cloudmine.api.Strings;
 import com.cloudmine.api.rest.response.LoginResponse;
 import com.google.inject.Inject;
@@ -43,6 +44,10 @@ public class LoginActivity extends RoboActionBarActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        CMSessionToken sessionToken = preferenceSaver.getSessionToken(this);
+        if(sessionToken != null) {
+            startActivity(FindArtActivity.newIntent(this, sessionToken));
+        }
     }
 
     public void onLogin(View view) {
