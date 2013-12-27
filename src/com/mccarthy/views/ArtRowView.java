@@ -1,6 +1,9 @@
 package com.mccarthy.views;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -27,9 +30,16 @@ public class ArtRowView extends LinearLayout {
     }
 
     public void setStreetArt(StreetArt art, ImageLoader imageLoader) {
-
         thumbnail.setImageUrl(art.getMainPhotoId(), imageLoader);
         titleText.setText(art.getTitle());
+    }
+
+    public Bitmap getStreetImage() {
+        Drawable image = thumbnail.getDrawable();
+        if(image instanceof BitmapDrawable) {
+            return ((BitmapDrawable)image).getBitmap();
+        }
+        return null;
     }
 
     @Override

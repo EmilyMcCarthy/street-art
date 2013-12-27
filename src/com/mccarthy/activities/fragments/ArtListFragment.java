@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ListView;
 import com.android.volley.Response;
 import com.cloudmine.api.CMSessionToken;
 import com.cloudmine.api.SearchQuery;
@@ -30,6 +31,7 @@ import java.util.List;
 
 public class ArtListFragment extends RoboListFragment{
 
+    public static final String VIEW_IMAGE_FRAGMENT_TAG = "view_image";
     @Inject
     private ErrorHandling errorHandling;
     @Inject
@@ -57,5 +59,15 @@ public class ArtListFragment extends RoboListFragment{
                 .getShared().limit(10).getCount().build();
 
         SharedRequestQueueHolders.getRequestQueue(getActivity()).add(request);
+
+    }
+
+    public ArtListAdapter getListAdapter() {
+        return (ArtListAdapter) super.getListAdapter();
+    }
+
+    public void onListItemClick(ListView listView, View view, int position, long id) {
+        ViewImageDialogFragment viewImageDialog = ViewImageDialogFragment.newInstance(getListAdapter().getItem(position).getMainPhotoId());
+        viewImageDialog.show(getFragmentManager(), VIEW_IMAGE_FRAGMENT_TAG);
     }
 }

@@ -4,12 +4,12 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import com.android.volley.RequestQueue;
-import com.cloudmine.api.rest.CMImageLoader;
-import com.cloudmine.api.rest.DiskBitmapCache;
-import com.cloudmine.api.rest.SharedRequestQueueHolders;
+import com.android.volley.toolbox.ImageLoader;
+import com.google.inject.Inject;
 import com.mccarthy.R;
 import com.mccarthy.models.StreetArt;
+import com.mccarthy.providers.ImageLoaderProvider;
+import roboguice.RoboGuice;
 
 import java.util.List;
 
@@ -21,12 +21,16 @@ public class ArtListAdapter extends BaseAdapter {
 
     private final List<StreetArt> artList;
     private final Context context;
-    private final CMImageLoader imageLoader;
+    private final ImageLoader imageLoader;
+
+    @Inject
+    ImageLoaderProvider imageLoaderProvider;
     public ArtListAdapter(Context context, List<StreetArt> artList) {
         this.context = context;
         this.artList = artList;
-        RequestQueue queue = SharedRequestQueueHolders.getRequestQueue(context);
-        imageLoader = new CMImageLoader(queue, new DiskBitmapCache(context));
+
+        RoboGuice.getInjector(context).injectMembers(this);
+        imageLoader = imageLoaderProvider.getImageLoader();
     }
 
     @Override
@@ -35,7 +39,7 @@ public class ArtListAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int position) {
+    public StreetArt getItem(int position) {
         return artList.get(position);
     }
 
@@ -53,6 +57,7 @@ public class ArtListAdapter extends BaseAdapter {
             artRow = (ArtRowView) View.inflate(context, R.layout.art_row, null);
         }
         artRow.setStreetArt(artList.get(position), imageLoader);
+
         return artRow;
     }
 }
